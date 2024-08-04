@@ -8,16 +8,15 @@ import pl.coderslab.charity.domain.Institution;
 import pl.coderslab.charity.service.DonationService;
 import pl.coderslab.charity.service.InstitutionService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class HomeController {
+public class DonationController {
 
     public final InstitutionService institutionService;
     private final DonationService donationService;
 
-    public HomeController(InstitutionService institutionService, DonationService donationService) {
+    public DonationController(InstitutionService institutionService, DonationService donationService) {
         this.institutionService = institutionService;
         this.donationService = donationService;
     }

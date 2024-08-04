@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 import pl.coderslab.charity.repository.CategoryRepository;
 import pl.coderslab.charity.repository.DonationRepository;
 
+import java.util.List;
+
 @Service
 public class DonationService {
 
@@ -12,4 +14,9 @@ public class DonationService {
     public DonationService(DonationRepository donationRepository) {
         this.donationRepository = donationRepository;
     }
+
+    public List<Integer> getAllBags() {
+        return donationRepository.findAllBags();
+    }
+
 }
