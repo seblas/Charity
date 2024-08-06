@@ -1,6 +1,7 @@
 package pl.coderslab.charity.service;
 
 import org.springframework.stereotype.Service;
+import pl.coderslab.charity.domain.Donation;
 import pl.coderslab.charity.repository.CategoryRepository;
 import pl.coderslab.charity.repository.DonationRepository;
 
@@ -17,6 +18,10 @@ public class DonationService {
 
     public List<Integer> getAllBags() {
         return donationRepository.findAllBags();
+    }
+
+    public void save(Donation donation) {
+        donationRepository.save(donation);
     }
 
 }

@@ -164,6 +164,78 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$step.parentElement.hidden = this.currentStep >= 5;
 
       // TODO: get data from inputs and show them in summary
+      if (this.currentStep === 5) {
+        const quantity = document.getElementById("quantity").value;
+        let bagsText = getWorekText(quantity) + " (";
+        const selectedCategoryDescriptions = document.querySelectorAll
+        ('input[name="categories"][type="checkbox"]:checked ~ .description');
+        selectedCategoryDescriptions.forEach(description => bagsText += description.textContent + ", ");
+        bagsText = bagsText.slice(0,-2);
+        bagsText += ")";
+        const bagsSummaryText = document.querySelector(".icon-bag").nextElementSibling;
+        bagsSummaryText.textContent = bagsText;
+
+        const selectedInstitutionDescription = document.querySelector
+        ('input[type="radio"][name="institution.id"]:checked ~ .description .title');
+        const institutionSummaryText = document.querySelector(".icon-hand").nextElementSibling;
+        institutionSummaryText.textContent = selectedInstitutionDescription.textContent;
+
+        const street = document.getElementById("street").value;
+        const city = document.getElementById("city").value;
+        const zipCode = document.getElementById("zipCode").value;
+        const phoneNumber = document.getElementById("phoneNumber").value;
+        const pickUpDate = document.getElementById("pickUpDate").value;
+        const pickUpTime = document.getElementById("pickUpTime").value;
+        const pickUpComment = document.getElementById("pickUpComment").value;
+        const addressColumn = document.getElementById("addressColumn");
+        const pickUpColumn = document.getElementById("pickUpColumn");
+        addressColumn.innerHTML = "<li>" + street + "</li>"
+        + "<li>" + city + "</li>"
+            + "<li>" + zipCode + "</li>"
+            + "<li>" + phoneNumber + "</li>";
+
+        pickUpColumn.innerHTML = "<li>" + pickUpDate + "</li>"
+            + "<li>" + pickUpTime + "</li>"
+            + "<li>" + pickUpComment + "</li>";
+
+      }
+
+      function getWorekText(count) {
+        let tekst;
+        switch (true) {
+          case (count === 1):
+            tekst = `${count} worek`;
+            break;
+          case (count >= 2 && count <= 4):
+            tekst = `${count} worki`;
+            break;
+          case (count >= 5 && count <= 21):
+            tekst = `${count} worków`;
+            break;
+          default:
+            let remainder = count % 10;
+            let remainder100 = count % 100;
+            if (remainder === 1 && remainder100 !== 11) {
+              tekst = `${count} worek`;
+            } else if (remainder >= 2 && remainder <= 4 && !(remainder100 >= 12 && remainder100 <= 14)) {
+              tekst = `${count} worki`;
+            } else {
+              tekst = `${count} worków`;
+            }
+            break;
+        }
+        return tekst;
+      }
+
+
+
+
+
+
+
+
+
+
     }
 
   }

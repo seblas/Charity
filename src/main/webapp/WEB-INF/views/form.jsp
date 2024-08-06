@@ -30,6 +30,11 @@
     </nav>
 
     <div class="slogan container container--90">
+        <c:if test="${not empty thanksMessage}">
+            <script type="text/javascript">
+                alert("<c:out value='${thanksMessage}'/>");
+            </script>
+        </c:if>
         <div class="slogan--item">
             <h1>
                 Oddaj rzeczy, których już nie chcesz<br/>
@@ -150,7 +155,7 @@
                     <div class="form-section--column">
                         <h4>Adres odbioru</h4>
                         <div class="form-group form-group--inline">
-                            <label> Ulica <form:input path="street" /> </label>
+                            <label> Ulica <form:input path="street"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
@@ -158,7 +163,7 @@
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label> Kod pocztowy <form:input path="zipCode" /> </label>
+                            <label> Kod pocztowy <form:input path="zipCode"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
@@ -173,7 +178,7 @@
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label> Godzina <form:input type="time" path="pickUpTime" /> </label>
+                            <label> Godzina <form:input type="time" path="pickUpTime"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
@@ -200,16 +205,13 @@
                         <ul>
                             <li>
                                 <span class="icon icon-bag"></span>
-                                <span class="summary--text"
-                                >4 worki ubrań w dobrym stanie dla dzieci</span
-                                >
+                                <span class="summary--text"></span>
                             </li>
 
                             <li>
                                 <span class="icon icon-hand"></span>
                                 <span class="summary--text"
-                                >Dla fundacji "Mam marzenie" w Warszawie</span
-                                >
+                                >Wybierz fundację!</span>
                             </li>
                         </ul>
                     </div>
@@ -217,20 +219,20 @@
                     <div class="form-section form-section--columns">
                         <div class="form-section--column">
                             <h4>Adres odbioru:</h4>
-                            <ul>
-                                <li>Prosta 51</li>
-                                <li>Warszawa</li>
-                                <li>99-098</li>
-                                <li>123 456 789</li>
+                            <ul id="addressColumn">
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
                             </ul>
                         </div>
 
                         <div class="form-section--column">
                             <h4>Termin odbioru:</h4>
-                            <ul>
-                                <li>13/12/2018</li>
-                                <li>15:40</li>
-                                <li>Brak uwag</li>
+                            <ul id="pickUpColumn">
+                                <li></li>
+                                <li></li>
+                                <li></li>
                             </ul>
                         </div>
                     </div>
