@@ -19,17 +19,19 @@ public class DonationController {
 
     private final DonationService donationService;
     private final CategoryService categoryService;
+    private final InstitutionService institutionService;
 
-    public DonationController(InstitutionService institutionService, DonationService donationService, CategoryService categoryService) {
+    public DonationController(InstitutionService institutionService, DonationService donationService, CategoryService categoryService, InstitutionService institutionService1) {
         this.donationService = donationService;
         this.categoryService = categoryService;
+        this.institutionService = institutionService1;
     }
 
     @RequestMapping("")
     public String formAction(Model model){
         model.addAttribute("donation", new Donation());
-
         model.addAttribute("categoryList",categoryService.getAll());
+        model.addAttribute("institutions", institutionService.findAll());
         return "form";
     }
 }
