@@ -3,36 +3,33 @@ package pl.coderslab.charity.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pl.coderslab.charity.domain.Category;
 import pl.coderslab.charity.domain.CoupleOfInstitutions;
+import pl.coderslab.charity.domain.Donation;
 import pl.coderslab.charity.domain.Institution;
+import pl.coderslab.charity.service.CategoryService;
 import pl.coderslab.charity.service.DonationService;
 import pl.coderslab.charity.service.InstitutionService;
 
 import java.util.List;
 
+@RequestMapping("/form")
 @Controller
 public class DonationController {
 
-    public final InstitutionService institutionService;
     private final DonationService donationService;
+    private final CategoryService categoryService;
 
-    public DonationController(InstitutionService institutionService, DonationService donationService) {
-        this.institutionService = institutionService;
+    public DonationController(InstitutionService institutionService, DonationService donationService, CategoryService categoryService) {
         this.donationService = donationService;
+        this.categoryService = categoryService;
     }
 
-    @RequestMapping("/")
-    public String homeAction(Model model){
-        List<Institution> institutions = institutionService.findAll();
-        CoupleOfInstitutions couplesList = new CoupleOfInstitutions();
-        model.addAttribute("coupleOfInstitutionsList",
-                couplesList.getCoupleOfInstitutionsList(institutions));
+    @RequestMapping("")
+    public String formAction(Model model){
+        model.addAttribute("donation", new Donation());
 
-        List<Integer> bags = donationService.getAllBags();
-        int totalBags = bags.stream().mapToInt(b -> b).sum();
-        model.addAttribute("totalBags", totalBags);
-        int totalDonations = bags.size();
-        model.addAttribute("totalDonations", totalDonations);
-        return "index";
+        model.addAttribute("categoryList",categoryService.getAll());
+        return "form";
     }
 }
