@@ -3,6 +3,7 @@ package pl.coderslab.charity.domain;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.cglib.core.Local;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -30,6 +31,9 @@ public class Donation {
 
     private String zipCode;
 
+    private String phoneNumber;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate pickUpDate;
 
     private LocalTime pickUpTime;
