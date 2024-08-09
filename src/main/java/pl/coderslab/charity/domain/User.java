@@ -3,7 +3,6 @@ package pl.coderslab.charity.domain;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.util.HashSet;
@@ -16,15 +15,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    @Size(min = 3, max = 20)
-    @Column(unique = true)
-    private String username;
-
     private String password;
 
     @Transient
-    private String confirmPassword;
+    private String password2;
 
     private boolean enabled;
 
@@ -39,4 +33,5 @@ public class User {
 
     @OneToMany
     private Set<Donation> donations = new HashSet<>();
+
 }
