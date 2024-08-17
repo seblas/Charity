@@ -22,14 +22,14 @@ public class SecurityConfig {
     @Bean
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                        .requestMatchers("/user", "/user/**").hasRole("USER") // dostęp wymaga uwierzytelnienia (dla zalogowanych) jako USER
-                        .requestMatchers("/user", "/admin", "/admin/**").hasRole("ADMIN") // dostęp wymaga uwierzytelnienia (dla zalogowanych) jako ADMIN
+                        .requestMatchers("/form", "/form/**").hasRole("USER") // dostęp wymaga uwierzytelnienia (dla zalogowanych) jako USER
+                        .requestMatchers("/form", "/admin", "/admin/**").hasRole("ADMIN") // dostęp wymaga uwierzytelnienia (dla zalogowanych) jako ADMIN
                         .anyRequest().permitAll()
                 )
                 .formLogin(form -> form
                         .loginPage("/login") // tu jest formularz logowania
                         .loginProcessingUrl("/perform_login") // tu formularz logowania przesyła dane, SS sprawdza te dane
-                        .defaultSuccessUrl("/user", true) // przekierowanie na /user po zalogowaniu
+                        .defaultSuccessUrl("/form", true) // przekierowanie na /user po zalogowaniu
                         .failureUrl("/login_error")
                         .permitAll()
                 )

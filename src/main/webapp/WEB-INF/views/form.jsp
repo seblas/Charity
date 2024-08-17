@@ -11,11 +11,18 @@
     <nav class="container container--70">
         <ul class="nav--actions">
             <li class="logged-user">
-                Witaj Agata
+                Witaj ${user.email}
                 <ul class="dropdown">
                     <li><a href="#">Profil</a></li>
                     <li><a href="#">Moje zbiórki</a></li>
-                    <li><a href="#">Wyloguj</a></li>
+                    <li><a href="">
+                        <form action="<c:url value="/perform_logout"/>" method="post">
+                            <input type="submit" value="Wyloguj" style="background: none; color: #3c3c3c; border: none; cursor: pointer;">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        </form>
+                    </a>
+
+                    </li>
                 </ul>
             </li>
         </ul>
