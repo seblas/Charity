@@ -30,7 +30,7 @@ public class SecurityConfig {
                         .loginPage("/login") // tu jest formularz logowania
                         .loginProcessingUrl("/perform_login") // tu formularz logowania przesyła dane, SS sprawdza te dane
                         .defaultSuccessUrl("/user", true) // przekierowanie na /user po zalogowaniu
-                        .failureUrl("/?error=true")
+                        .failureUrl("/login_error")
                         .permitAll()
                 )
                 .logout(logout -> logout
@@ -48,7 +48,15 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return new JdbcUserDetailsManager(dataSource);
+       // return new JdbcUserDetailsManager(dataSource);
+        JdbcUserDetailsManager userDetailsManager = new JdbcUserDetailsManager(dataSource);
+        userDetailsManager.setUsersByUsernameQuery(
+                "SELECT email AS username, password, enabled FROM user WHERE email = ?");
+        userDetailsManager.setAuthoritiesByUsernameQuery(
+                "SELECT u.email AS username, a.name AS authority FROM user u " +
+                        "JOIN users_authorities ua ON u.id = ua.users_id " +
+                        "JOIN authority a ON ua.authorities_id = a.id WHERE u.email = ?");
+        return userDetailsManager;
     }
 
 }

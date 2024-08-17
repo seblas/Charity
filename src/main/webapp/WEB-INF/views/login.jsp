@@ -32,22 +32,23 @@
 
     <section class="login-page">
       <h2>Zaloguj się</h2>
-      <form:form method="post" modelAttribute="user">
+      <form method="post" action="/perform_login">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
         <div class="form-group">
-          <form:input path="email" name="email" value="${user.email}" id="email" required="required" placeholder="Email"/>
-          <form:errors path="email"/>
+          <input type="text" name="username" required="required" placeholder="Email"/>
         </div>
+
         <div class="form-group">
-          <form:password path="password" name="password" id="password" required="required" placeholder="Hasło"/>
-          <form:errors path="password"/>
+          <input type="password" name="password" required="required" placeholder="Hasło"/>
           <a href="#" class="btn btn--small btn--without-border reset-password">Przypomnij hasło</a>
         </div>
 
         <div class="form-group form-group--buttons">
           <a href="<c:url value="/registration"/>" class="btn btn--without-border">Załóż konto</a>
-          <form:button class="btn" type="submit">Zaloguj się</form:button>
+          <input type="submit" class="btn" value="Zaloguj się"/>
         </div>
-      </form:form>
+      </form>
     </section>
 
     <%@ include file="footer.jsp" %>
