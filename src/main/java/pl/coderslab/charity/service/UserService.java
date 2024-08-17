@@ -49,4 +49,9 @@ public class UserService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found with id " + id);
         }
     }
+
+    public Optional<User> findUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+
+    }
 }

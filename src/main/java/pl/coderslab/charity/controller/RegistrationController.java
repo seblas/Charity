@@ -43,6 +43,9 @@ public class RegistrationController {
         if(!user.getPassword().equals(user.getPassword2())) {
             result.rejectValue("password", "error.user", "Hasła nie są zgodne");
         }
+        if(userService.findUserByEmail(user.getEmail()).isPresent()) {
+            result.rejectValue("email", "error.user", "Już jest taki email, wybierz inny");
+        }
         if (result.hasErrors()) {
             return "register";
         }
