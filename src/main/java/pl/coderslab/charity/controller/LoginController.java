@@ -3,11 +3,15 @@ package pl.coderslab.charity.controller;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.charity.domain.Authority;
@@ -38,8 +42,22 @@ public class LoginController {
 
     @RequestMapping("/login_error")
     public String loginFormError(Model model) {
-        model.addAttribute("thanksMessage", "Nieprawidłowy Email lub Hasło, spróbuj ponownie.");
+        model.addAttribute("message", "Nieprawidłowy Email lub Hasło, spróbuj ponownie.");
         return "login";
+    }
+
+    @ModelAttribute("user")
+    private User getLoggedUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = null;
+        if (authentication != null && authentication.getPrincipal() instanceof UserDetails userDetails) {
+            username = userDetails.getUsername();
+            Optional<User> user = userService.findUserByEmail(username);
+            if (user.isPresent()) {
+                return user.get();
+            }
+        }
+        return null;
     }
 
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);

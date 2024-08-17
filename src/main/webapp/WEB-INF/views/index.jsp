@@ -8,10 +8,33 @@
 <body>
 <header class="header--main-page">
     <nav class="container container--70">
+        <c:if test="${user == null}">
         <ul class="nav--actions">
             <li><a href="/login" class="btn btn--small btn--without-border">Zaloguj</a></li>
             <li><a href="/registration" class="btn btn--small btn--highlighted">Załóż konto</a></li>
         </ul>
+        </c:if>
+
+        <c:if test="${user != null}">
+        <ul class="nav--actions">
+            <li class="logged-user">
+                Witaj ${user.email}
+                <ul class="dropdown">
+                    <li><a href="#">Profil</a></li>
+                    <li><a href="#">Moje zbiórki</a></li>
+                    <li><a href="">
+                        <form action="<c:url value="/perform_logout"/>" method="post">
+                            <input type="submit" value="Wyloguj" style="background: none; color: #3c3c3c; border: none; cursor: pointer;">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        </form>
+                    </a>
+
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        </c:if>
+
 
         <ul>
             <li><a href="/" class="btn btn--without-border active">Start</a></li>

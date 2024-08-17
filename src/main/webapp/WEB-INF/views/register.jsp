@@ -3,16 +3,17 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="pl">
 <%@ include file="header.jsp" %>
 <body>
 <header>
     <nav class="container container--70">
-        <ul class="nav--actions">
-            <li><a href="<c:url value="/login"/>">Zaloguj</a></li>
-            <li class="highlighted"><a href="<c:url value="/registration"/>">Załóż konto</a></li>
-        </ul>
+            <ul class="nav--actions">
+                <li><a href="/login" class="btn btn--small btn--without-border">Zaloguj</a></li>
+                <li><a href="/registration" class="btn btn--small btn--highlighted">Załóż konto</a></li>
+            </ul>
 
         <ul>
             <li><a href="/" class="btn btn--without-border active">Start</a></li>

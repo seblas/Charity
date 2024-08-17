@@ -46,8 +46,7 @@ public class DonationController {
     }
 
     @PostMapping("")
-    public String formAction(@Valid Donation donation, BindingResult result, Model model) {
-        model.addAttribute("thanksMessage", "Dziękujemy za oddanie rzeczy!");
+    public String formAction(@Valid Donation donation, BindingResult result) {
         donationService.save(donation);
         return "form-confirmation";
     }

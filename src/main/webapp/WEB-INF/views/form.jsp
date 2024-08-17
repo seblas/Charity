@@ -37,11 +37,6 @@
     </nav>
 
     <div class="slogan container container--90">
-        <c:if test="${not empty thanksMessage}">
-            <script type="text/javascript">
-                alert("<c:out value='${thanksMessage}'/>");
-            </script>
-        </c:if>
         <div class="slogan--item">
             <h1>
                 Oddaj rzeczy, których już nie chcesz<br/>

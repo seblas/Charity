@@ -62,7 +62,7 @@ public class RegistrationController {
             throw new RuntimeException("Authority 'ROLE_USER' not found");
         }
 
-        model.addAttribute("thanksMessage", "Konto zostało założone, możesz się zalogować");
+        model.addAttribute("message", "Konto zostało założone, możesz się zalogować");
         model.addAttribute("user", new User());
         return "login";
     }
